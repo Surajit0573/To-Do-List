@@ -3,9 +3,21 @@ const cors = require("cors");
 const {config} = require("dotenv")
 config();
 const app = express();
+// Allowed origins for development and production
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://to-do-list-three-sigma-28.vercel.app"
+];
+
 app.use(cors({
-  credentials: true,
-  origin: ['http://localhost:5173',process.env.CLIENT_URL]
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
 }));
 app.use(express.json());
 
