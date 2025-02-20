@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { PlusCircle, Trash2, CheckCircle, Circle } from "lucide-react";
 
-const API_URL = "http://localhost:5000/tasks";
+const API_URL = import.meta.env.VITE_API_URL;
 
 function App() {
   const [tasks, setTasks] = useState([]);
